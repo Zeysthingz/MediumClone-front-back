@@ -1,3 +1,4 @@
-
+django-tinymce==3.6.1
 Django==4.2.5
-
+Pillow==10.0.1
+python-slugify==8.0.1
