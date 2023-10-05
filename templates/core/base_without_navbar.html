@@ -1,0 +1,23 @@
+<!--to add css and js folders-->
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MD Clone</title>
+    <!--    added external style css -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+      {% block content %}
+
+      {% endblock content %}
+
+    <!--    Article Examples End-->
+    <!--instead of cdn we gave static files externally-->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.bundle.min.css' %}">
+</body>
+</html>

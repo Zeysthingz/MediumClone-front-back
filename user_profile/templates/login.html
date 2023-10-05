@@ -1,0 +1,29 @@
+
+<!--loaded static files directly from base.html-->
+{% extends 'core/base_without_navbar.html' %}
+
+<!--code inside content will override parent block-->
+{% block content %}
+    <div class="container mt-5">
+<!--        emmet code-->
+<!--        .row>.col-sm-6.offset-sm-3>form-->
+<!--        Her form inputu için name bilgisi olmalıdır-->
+        <div class="row">
+            <div class="col-sm-6 offset-sm-3">
+                <h1 style="text-align: center;">Login</h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
