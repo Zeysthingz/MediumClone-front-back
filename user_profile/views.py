@@ -7,16 +7,22 @@ def login_view(request):
     context = {
 
     }
+    # TODO: if user is already logged in should be redirect to home page
+
+    if request.user.is_authenticated:
+        # TODO give info as you already logged in
+        messages.info(request, "Dear" "  "   f'{request.user.username}    You already logged in.')
+        return redirect('home_view')
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(f"username: {email} password: {password}")
         user = authenticate(request, username=email, password=password)
-        # TODO: info user abt logged in
-        # TODO: validate fields are correct or not
+        print(user)
         if user is not None:
-
             login(request, user)
-            # you can directly redirect to view
+            messages.success(request, f'{request.user.username} Successfully logged in.')
             return redirect('home_view')
+        # else:
+        #     messages.warning(request, "Please enter valid email and password.")
+        #     return redirect('user_profile:login_view')
     return render(request, 'login.html', context)
