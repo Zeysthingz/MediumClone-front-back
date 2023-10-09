@@ -1,5 +1,6 @@
 
 <!--loaded static files directly from base.html-->
+
 {% extends 'core/base_without_navbar.html' %}
 
 <!--code inside content will override parent block-->
@@ -31,13 +32,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password Confirm</label>
-                    <input type="password" class="form-control" id="exampleInputPassword2" name="password-confirm">
+                    <input type="password" class="form-control" id="exampleInputPassword2" name="password_confirm">
                 </div>
                 <div class="mb-3">
                     <label for="instagram" class="form-label">Instagram Account</label>
                     <input type="text" class="form-control" id="instagram" name="instagram_account">
                 </div>
                 <button type="submit" class="btn btn-primary">Sign In</button>
+                <a href="{% url 'home_view' %}" class="btn btn-secondary">Cancel</a>
             </form>
         </div>
     </div>

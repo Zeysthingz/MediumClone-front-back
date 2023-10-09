@@ -44,5 +44,18 @@ def register_view(request):
 
     }
     if request.method == "POST":
-        print(request.POST)
+        profile_info = request.POST
+        first_name = profile_info.get('first_name')
+        last_name = profile_info.get('last_name')
+        email = profile_info.get('email')
+        password = profile_info.get('password')
+        password_confirm = profile_info.get('password_confirm')
+        # instagram_account = profile_info.get('instagram_account')
+        if len(first_name) < 3 or len(last_name) < 3 or len(email) < 3 or len(password) < 3:
+            messages.warning(request,
+                             "Please enter valid information. Informations can not be less than three characters"
+                             )
+        if password != password_confirm:
+            messages.warning(request, "Please enter same password")
+            return redirect('user_profile:register_view')
     return render(request, 'register.html', context)
