@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+
+<!--loaded static files directly from base.html-->
+{% extends 'core/base_without_navbar.html' %}
+
+<!--code inside content will override parent block-->
+{% block content %}
+<div class="container mt-5">
+    <!--        emmet code-->
+    <!--        .row>.col-sm-6.offset-sm-3>form-->
+    <!--        Her form inputu için name bilgisi olmalıdır-->
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3">
+            <h1 style="text-align: center;">Sıgn In</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="first_name" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name">
+                </div>
+                <div class="mb-3">
+                    <label for="last_name" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="last_name"  name="last_name">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password Confirm</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2" name="password-confirm">
+                </div>
+                <div class="mb-3">
+                    <label for="instagram" class="form-label">Instagram Account</label>
+                    <input type="text" class="form-control" id="instagram" name="instagram_account">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
