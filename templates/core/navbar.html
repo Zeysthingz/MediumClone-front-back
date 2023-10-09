@@ -15,7 +15,9 @@
                     Membership
                 </a>
                 <a class="nav-link" href="#">Write</a>
+                {% if not request.user.is_authenticated %}
                 <a class="nav-link" href="#">Sign In</a>
+                {% endif %}
                 <a class="nav-link btn btn-dark text-light px-3 rounded-pill ms-3">Get Started</a>
             </div>
         </div>
