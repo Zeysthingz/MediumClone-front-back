@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+<!--      add messages to shown frontend-->
+      {% include 'core/messages.html' %}
       {% block content %}
-
       {% endblock content %}
 
     <!--    Article Examples End-->
