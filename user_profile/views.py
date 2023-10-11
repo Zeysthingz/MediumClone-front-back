@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 
 
 def login_view(request):
@@ -21,14 +22,12 @@ def login_view(request):
             # redirects to login page
             return redirect('user_profile:login_view')
 
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, f'{request.user.username} Successfully logged in.')
             return redirect('home_view')
-        # else:
-        #     messages.warning(request, "Please enter valid email and password.")
-        #     return redirect('user_profile:login_view')
+
     return render(request, 'login.html', context)
 
 
@@ -39,6 +38,7 @@ def logout_view(request):
     return redirect('home_view')
 
 
+# register page
 def register_view(request):
     context = {
 
@@ -51,11 +51,22 @@ def register_view(request):
         password = profile_info.get('password')
         password_confirm = profile_info.get('password_confirm')
         # instagram_account = profile_info.get('instagram_account')
-        if len(first_name) < 3 or len(last_name) < 3 or len(email) < 3 or len(password) < 3:
+        if len(first_name) < 2 or len(last_name) < 2 or len(email) < 2 or len(password) < 2:
             messages.warning(request,
-                             "Please enter valid information. Informations can not be less than three characters"
+                             "Please enter valid information. Informations can not be less than two characters"
                              )
         if password != password_confirm:
             messages.warning(request, "Please enter same password")
             return redirect('user_profile:register_view')
+        user, created = User.objects.get_or_create(email=email)
+        # if user is not created that mens user already exists in database
+        if not created:
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                messages.warning(request, "This email is already exists... Redirecting to home page")
+                # if we can authenticate user we logged in user
+                login(request, user)
+                return redirect('home_view')
+            messages.warning(request, "User already exists but can't login... Redirecting to login page")
+            return redirect('user_profile:login_view')
     return render(request, 'register.html', context)
