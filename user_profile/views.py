@@ -1,9 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from .models import Profile
+from slugify import slugify
 
 
+# login page
 def login_view(request):
     context = {
 
@@ -44,29 +47,47 @@ def register_view(request):
 
     }
     if request.method == "POST":
-        profile_info = request.POST
-        first_name = profile_info.get('first_name')
-        last_name = profile_info.get('last_name')
-        email = profile_info.get('email')
-        password = profile_info.get('password')
-        password_confirm = profile_info.get('password_confirm')
-        # instagram_account = profile_info.get('instagram_account')
+        post_info = request.POST
+        first_name = post_info.get('first_name')
+        last_name = post_info.get('last_name')
+        email = post_info.get('email')
+        password = post_info.get('password')
+        password_confirm = post_info.get('password_confirm')
+        instagram_account = post_info.get('instagram_account')
+
         if len(first_name) < 2 or len(last_name) < 2 or len(email) < 2 or len(password) < 2:
-            messages.warning(request,
-                             "Please enter valid information. Informations can not be less than two characters"
+            messages.warning(request, "Please enter valid information. Informations can not be less than two characters"
                              )
+            return redirect('user_profile:register_view')
         if password != password_confirm:
             messages.warning(request, "Please enter same password")
             return redirect('user_profile:register_view')
-        user, created = User.objects.get_or_create(email=email)
+        user, created = User.objects.get_or_create(username=email, email=email)
         # if user is not created that mens user already exists in database
         if not created:
-            user = authenticate(request, email=email, password=password)
+            user_login = authenticate(request, email=email, password=password)
             if user is not None:
                 messages.warning(request, "This email is already exists... Redirecting to home page")
                 # if we can authenticate user we logged in user
-                login(request, user)
+                login(request, user_login)
                 return redirect('home_view')
             messages.warning(request, "User already exists but can't login... Redirecting to login page")
             return redirect('user_profile:login_view')
+        # if user is not in database already we create user and register it
+        user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
+        user.set_password(password)
+
+        profile, profile_created = Profile.objects.get_or_create(user=user)
+        profile.instagram = instagram_account
+        profile.slug = slugify(f"{first_name}-{last_name}")
+        user.save()
+        profile.save()
+
+        messages.success(request, f'{user.first_name} Succesfully registered ..')
+        user_login = authenticate(request, email=email, password=password)
+        login(request, user_login)
+        return redirect('home_view')
+
     return render(request, 'register.html', context)
