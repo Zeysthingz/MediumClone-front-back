@@ -23,6 +23,10 @@ from page.views import home_view
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', home_view, name='home_view'),
+
                   # User
                   path('user/', include('user_profile.urls', namespace='user')),
+
+                  # Blog
+                  path('blog/', include('blog.urls', namespace='blog')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
