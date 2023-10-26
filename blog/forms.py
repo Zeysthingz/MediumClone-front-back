@@ -14,3 +14,9 @@ class BlogModelForm(forms.ModelForm):
             'category',
             'tag',
         ]
+
+    # automatically initialized widget
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['category'].widget.attrs.update({'class': 'form-control'})
+        self.fields['title'].widget.attrs.update({'class': 'form-control'})
