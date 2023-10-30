@@ -1,0 +1,9 @@
+django-tinymce==3.6.1
+Django==4.2.5
+Pillow==10.0.1
+python-slugify==8.0.1
+django-autoslug==1.9.9
+django-crispy-forms-2.1
+crispy-bootstrap5-0.7
+django-extensions==3.2.3
+ipython==8.12.3
