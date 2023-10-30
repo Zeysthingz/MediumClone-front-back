@@ -1,12 +1,7 @@
+from core.validators import title_check
 from django import forms
 from .models import Blog
 from tinymce.widgets import TinyMCE
-from django.core.validators import MinLengthValidator
-
-
-def title_check(value):
-    if len(value) < 3:
-        raise forms.ValidationError("Title must be at least 3 characters Our own validator.")
 
 
 class BlogModelForm(forms.ModelForm):
