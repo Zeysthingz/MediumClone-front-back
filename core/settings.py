@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'tinymce',
+    'easy_thumbnails',
     'page',
     'user_profile',
     'blog',
@@ -130,6 +131,16 @@ MEDIA_ROOT = BASE_DIR / 'media_files'
 # crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Easy Thumbnails
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (30, 30), 'crop': True},
+        'avatar2': {'size': (60, 60), 'crop': True},
+        'thumbnail': {'size': (800, 600), 'crop': True},
+        'page': {'size': (1600, 750), 'crop': True},
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
