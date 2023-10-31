@@ -13,7 +13,7 @@ class BlogModelForm(forms.ModelForm):
         model = Blog
         fields = [
             'title',
-            'image',
+            'cover_image',
             'content',
             'category',
             'tag',

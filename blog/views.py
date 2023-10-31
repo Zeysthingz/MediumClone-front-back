@@ -1,6 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
 import json
+
 from .models import Blog, BlogCategory, BlogTag
 from .forms import BlogModelForm
 
@@ -17,14 +20,14 @@ def create_blog_view(request):
         if form.is_valid():
             f = form.save(commit=False)
             f.user = request.user
+            # form object created by save method
             f.save()
             tags_data = json.loads(form.cleaned_data.get('tag'))
-            print(type(tags_data))
             for tag_data in tags_data:
-                print(tag_data)
-
-                # tag_items, created = BlogTag.objects.get_or_create(title=item.item.get('value'))
-                # # save to form
-                # f.tag.add(tag_items)
+                tag, created = BlogTag.objects.get_or_create(title=tag_data.get('value'))
+                # save new tags to db
+                f.tag.add(tag)
+            messages.success(request, 'Blog created successfully')
+            return redirect('home_view')
 
     return render(request, 'create_blog.html', context)

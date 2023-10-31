@@ -52,7 +52,7 @@ class Blog(BaseModel):
     category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True)
     tag = models.ManyToManyField(BlogTag)
     content = tinymce_models.HTMLField(blank=True, null=True)
-    image = models.ImageField(upload_to='post/', blank=True, null=True)
+    cover_image = models.ImageField(upload_to='post/', blank=True, null=True)
     # to see how many people wiev the post
     viewer = models.PositiveIntegerField(default=0)
 
