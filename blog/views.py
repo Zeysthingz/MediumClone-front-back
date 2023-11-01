@@ -25,6 +25,9 @@ def create_blog_view(request):
             tags_data = json.loads(form.cleaned_data.get('tag'))
             for tag_data in tags_data:
                 tag, created = BlogTag.objects.get_or_create(title=tag_data.get('value').lower())
+                # after we changed value of object we should save it
+                tag.is_active = True
+                tag.save()
                 # save new tags to db
                 f.tag.add(tag)
             messages.success(request, 'Blog created successfully')

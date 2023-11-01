@@ -16,6 +16,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ('title',)
 
 
 class BlogCategory(BaseModel):
@@ -55,6 +56,9 @@ class Blog(BaseModel):
     cover_image = models.ImageField(upload_to='post/', blank=True, null=True)
     # to see how many people wiev the post
     viewer = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('-created_at',)
 
     def __str__(self):
         return self.title

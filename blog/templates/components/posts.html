@@ -7,14 +7,14 @@
                 <small class="ms-2">{{ post.user.get_full_name }}</small>
             </a>
         </div>
-        <h4 class="mt-2">{{ post.title }}</h4>
-        <p class="text-muted">{{ post.content|safe|truncatewords_html:15  }}</p>
+        <h4 class="mt-2 mb-1">{{ post.title }}</h4>
+        <span class="text-muted">{{ post.content|safe|truncatewords_html:15  }}</span>
         <!--                        Yanyan liste içinde content koymak için yapılmış yapı ul.list-inline>.list-inline-item*3-->
         <ul class="list-inline">
             <li class="list-inline-item fs-12 text-muted">Jul 10</li>
             <li class="list-inline-item fs-12 text-muted">5 min read</li>
             <li class="list-inline-item">
-                <span class="badge  fs-12 text-muted">Film</span>
+                <span class="badge  fs-12 text-muted">{{ post.category }}</span>
             </li>
             <!--                            liste elemaını float end ile en saga yanastırdık ve ikon yerlestırdık-->
             <li class="list-inline-item fs-12 float-end ">
@@ -27,6 +27,7 @@
         </ul>
     </div>
     <div class="col-sm-4">
-        <img src="{{ post.cover_image|thumbnail_url:'thumbnail' }} " class="w-100 img-thumbnail" alt="">
+        <img src="{{ post.cover_image|thumbnail_url:'thumbnail' }}" alt="" class="w-100 img-thumbnail">
+
     </div>
 </article>
