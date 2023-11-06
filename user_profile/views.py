@@ -14,18 +14,18 @@ def login_view(request):
     # TODO: if user is already logged in should be redirect to home page
 
     if request.user.is_authenticated:
-        # TODO give info as you already logged in
         messages.info(request, "Dear" "  "   f'{request.user.username}    You already logged in.')
         return redirect('home_view')
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        if len(email) < 6 or len(password) < 6:
+        if len(email) < 6 or len(password) < 1:
             messages.warning(request, "Please enter valid email and password")
             # redirects to login page
             return redirect('user_profile:login_view')
 
-        user = authenticate(request, email=email, password=password)
+        # authenticate takes username as default but we can change it to email
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, f'{request.user.username} Successfully logged in.')
