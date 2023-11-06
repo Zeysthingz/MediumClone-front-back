@@ -63,14 +63,11 @@ class Blog(BaseModel):
     def __str__(self):
         return self.title
 
-    # get absolute creates a path with the user friendly slug it takes from the url and also creates a path with the id.
-    # The get_absolute_url method is responsible for constructing the URL for a
-    # todo item. It uses the reverse function to generate the URL based on the provided view name and keyword arguments.
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         'blog:post_detail_view',
-    #         kwargs={
-    #             "category_slug": self.category.slug,
-    #             "post_slug": self.slug,
-    #         }
-    #     )
+    def get_absolute_url(self):
+        return reverse(
+            'read:post_detail_view',
+            kwargs={
+                "user_slug": self.user.profile.slug,
+                "post_slug": self.slug,
+            }
+        )
