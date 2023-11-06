@@ -8,14 +8,17 @@ from .models import (
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'user', 'is_active', 'category', 'view_count']
+    list_display_links = ['title', 'user', 'category', 'is_active', 'view_count']
 
 
 @admin.register(BlogCategory)
 class BlogCategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'is_active']
+    list_display_links = ['title', 'is_active']
 
 
 @admin.register(BlogTag)
 class BlogTagAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'is_active']
+    list_display_links = ['title', 'is_active']

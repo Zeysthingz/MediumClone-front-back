@@ -55,7 +55,7 @@ class Blog(BaseModel):
     content = tinymce_models.HTMLField(blank=True, null=True)
     cover_image = models.ImageField(upload_to='post/', blank=True, null=True)
     # to see how many people wiev the post
-    viewer = models.PositiveIntegerField(default=0)
+    view_count = models.PositiveIntegerField(default=0)
 
     class Meta:
         ordering = ('-created_at',)
