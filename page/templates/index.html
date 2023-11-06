@@ -244,7 +244,7 @@
             <!--                her bir liste elamanı inline yan yana durur-->
             <ul class="list-inline">
                 {% for category in categories %}
-                    <li class="list-inline-item border p-2 rounded-pill text-muted fs-12 mt-1">{{ category.title }}</li>
+                <a href="{{ category.get_absolute_url }}" class="list-inline-item border text-decoration-none p-2 rounded-pill text-muted fs-12 mt-1">{{ category.title }}</a>
                 {% endfor %}
             </ul>
             <h2 class="fs-12 text-success">See more topics</h2>

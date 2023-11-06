@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 import json
 
@@ -34,3 +34,23 @@ def create_blog_view(request):
             return redirect('home_view')
 
     return render(request, 'create_blog.html', context)
+
+
+def category_view(request, category_slug):
+    category = get_object_or_404(BlogCategory, slug=category_slug)
+    posts = Blog.objects.filter(category=category)
+    context = {
+        'category': category,
+        'posts': posts,
+    }
+    return render(request, 'components/post_list.html', context)
+
+
+def tag_view(request, tag_slug):
+    tag = get_object_or_404(BlogTag, slug=tag_slug)
+    posts = Blog.objects.filter(tag=tag)
+    context = {
+        'tag': tag,
+        'posts': posts,
+    }
+    return render(request, 'components/post_list.html', context)

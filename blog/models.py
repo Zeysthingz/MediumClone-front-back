@@ -24,28 +24,26 @@ class BlogCategory(BaseModel):
     def __str__(self):
         return self.title
 
-    # since we use a namspace whi adding todo third party app to core app, we should call view with this namespace.
-    # we use this function to give html files to pah of view
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         'blog:category_view',
-    #         kwargs={
-    #             "category_slug": self.slug
-    #         }
-    #     )
+    def get_absolute_url(self):
+        return reverse(
+            'blog:category_view',
+            kwargs={
+                "category_slug": self.slug
+            }
+        )
 
 
 class BlogTag(BaseModel):
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         'blog:tag_view',
-    #         kwargs={
-    #             "tag_slug": self.slug
-    #         }
-    #     )
+    def get_absolute_url(self):
+        return reverse(
+            'blog:tag_view',
+            kwargs={
+                "tag_slug": self.slug
+            }
+        )
 
 
 class Blog(BaseModel):
@@ -54,7 +52,6 @@ class Blog(BaseModel):
     tag = models.ManyToManyField(BlogTag)
     content = tinymce_models.HTMLField(blank=True, null=True)
     cover_image = models.ImageField(upload_to='post/', blank=True, null=True)
-    # to see how many people wiev the post
     view_count = models.PositiveIntegerField(default=0)
 
     class Meta:

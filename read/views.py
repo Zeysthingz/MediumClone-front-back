@@ -14,6 +14,7 @@ def all_post(request, user_slug):
     return render(request, 'all_post.html', context)
 
 
+# dont need to use user_slug in view but to make it show in url to user  we should get it from url
 def post_detail_view(request, user_slug, post_slug):
     post = get_object_or_404(Blog, slug=post_slug, is_active=True)
     context = {
