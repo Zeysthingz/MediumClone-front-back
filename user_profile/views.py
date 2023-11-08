@@ -1,9 +1,46 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from .forms import ProfileModelForm
 from .models import Profile
 from slugify import slugify
+
+
+# profile edit page
+@login_required(login_url='user_profile:login_view')
+def profile_edit_view(request):
+    user = request.user
+    initial_data = {
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+    }
+    # brings user informations already in database
+    form = ProfileModelForm(instance=user.profile, initial=initial_data)
+
+    # if user wants to update his/her profile
+    if request.method == 'POST':
+        form = ProfileModelForm(
+            request.POST or None,
+            request.FILES or None,
+            instance=user.profile,
+        )
+        if form.is_valid():
+            f = form.save(commit=False)
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+            user.save()
+            f.save()
+            messages.success(request, "Your profile successfully updated")
+            return redirect('user_profile:profile_edit_view')
+
+    title = "Edit Profile"
+    context = {
+        'form': form,
+        'title': title,
+    }
+    return render(request, 'core/common_components/form.html', context)
 
 
 # login page
