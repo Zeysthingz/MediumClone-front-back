@@ -18,12 +18,12 @@
     {% include 'core/navbar.html' %}
 
     {% block content %}
-
     {% endblock content %}
 
-
-    <!--    Article Examples End-->
-    <!--instead of cdn we gave static files externally-->
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block script %}
+
+    {% endblock script %}
 </body>
 </html>

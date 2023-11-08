@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 import json
@@ -56,3 +57,10 @@ def tag_view(request, tag_slug):
         'posts': posts,
     }
     return render(request, 'components/post_list.html', context)
+
+
+@login_required(login_url='user_profile:login_view')
+def fav_update_view(request):
+    if request.method == 'POST':
+        print(request.POST)
+        return JsonResponse({'status': '200'})
