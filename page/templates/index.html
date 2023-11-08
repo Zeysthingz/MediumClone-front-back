@@ -42,194 +42,20 @@
     </div>
 
     <div class="row">
-        <!-- article 1 -->
-        <article class="col-sm-4">
-            <div class="row">
-                <div class="col-2 text-muted fs-2 op-02">
-                    01
-                </div>
-                <div class="col-10 mt-3">
-                    <div>
-                        <!--                        a linki içine alıyorum cunku tum yere gelip basınca hepsı aynı yere linkleniyor-->
-                        <a href="#" class="text-decoration-none text-muted">
-                            <img src="https://picsum.photos/id/110/30/30?grayscale" class="rounded-circle" alt="">
-                            <small class="ms-2">Tom Cooper</small>
-                        </a>
-                    </div>
-                    <div>
 
-                        <h2 class="h6 mt-1">
-                            <a href="#" class="text-decoration-none text-dark">
-                                Lorem ipsum dolor sit.
-                            </a>
-                        </h2>
-                        <ul class="list-inline fs-12 op-04">
-                            <li class="list-inline-item">Sep 28</li>
-                            <li class="list-inline-item">2 min read</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--                article 2-->
-        </article>
-        <article class="col-sm-4">
-            <div class="row">
-                <div class="col-2 text-muted fs-2 op-02">
-                    02
-                </div>
-                <div class="col-10 mt-3">
-                    <div>
-                        <!--                        a linki içine alıyorum cunku tum yere gelip basınca hepsı aynı yere linkleniyor-->
-                        <a href="#" class="text-decoration-none text-muted">
-                            <img src="https://picsum.photos/id/10/30/30?grayscale" class="rounded-circle" alt="">
-                            <small class="ms-2">Barack Obama</small>
-                        </a>
-                    </div>
-                    <div>
+        {% for top_post in top_posts %}
+        {% include 'components/top_articles.html' with count=forloop.counter post=top_post %}
+        {% endfor %}
 
-                        <h2 class="h6 mt-1">
-                            <a href="#" class="text-decoration-none text-dark">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores.
-                            </a>
-                        </h2>
-                        <ul class="list-inline fs-12 op-04">
-                            <li class="list-inline-item"> Jul 16</li>
-                            <li class="list-inline-item">15 min read</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--                article 3-->
-        </article>
-        <article class="col-sm-4">
-            <div class="row">
-                <div class="col-2 text-muted fs-2 op-02">
-                    03
-                </div>
-                <div class="col-10 mt-3">
-                    <div>
-                        <!--                        a linki içine alıyorum cunku tum yere gelip basınca hepsı aynı yere linkleniyor-->
-                        <a href="#" class="text-decoration-none text-muted">
-                            <img src="https://picsum.photos/id/90/30/30?grayscale" class="rounded-circle" alt="">
-                            <small class="ms-2">Helana Bohem Carter</small>
-                        </a>
-                    </div>
-                    <div>
 
-                        <h2 class="h6 mt-1">
-                            <a href="#" class="text-decoration-none text-dark">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </a>
-                        </h2>
-                        <ul class="list-inline fs-12 op-04">
-                            <li class="list-inline-item"> Jul 17</li>
-                            <li class="list-inline-item">4 min read</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </article>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
                 crossorigin="anonymous"></script>
     </div>
 </section>
-<section class="container">
-    <div class="row">
-        <!-- article 1 -->
-        <article class="col-sm-4">
-            <div class="row">
-                <div class="col-2 text-muted fs-2 op-02">
-                    04
-                </div>
-                <div class="col-10 mt-3">
-                    <div>
-                        <!--                        a linki içine alıyorum cunku tum yere gelip basınca hepsı aynı yere linkleniyor-->
-                        <a href="#" class="text-decoration-none text-muted">
-                            <img src="https://picsum.photos/id/15/30/30?grayscale" class="rounded-circle" alt="">
-                            <small class="ms-2">M.G. Siegler</small>
-                        </a>
-                    </div>
-                    <div>
 
-                        <h2 class="h6 mt-1">
-                            <a href="#" class="text-decoration-none text-dark">
-                                Lorem ipsum dolor sit.
-                            </a>
-                        </h2>
-                        <ul class="list-inline fs-12 op-04">
-                            <li class="list-inline-item">Sep 28</li>
-                            <li class="list-inline-item">2 min read</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--                article 2-->
-        </article>
-        <article class="col-sm-4">
-            <div class="row">
-                <div class="col-2 text-muted fs-2 op-02">
-                    05
-                </div>
-                <div class="col-10 mt-3">
-                    <div>
-                        <!--                        a linki içine alıyorum cunku tum yere gelip basınca hepsı aynı yere linkleniyor-->
-                        <a href="#" class="text-decoration-none text-muted">
-                            <img src="https://picsum.photos/id/18/30/30?grayscale" class="rounded-circle" alt="">
-                            <small class="ms-2">Thomas Smith in The Generator</small>
-                        </a>
-                    </div>
-                    <div>
-
-                        <h2 class="h6 mt-1">
-                            <a href="#" class="text-decoration-none text-dark">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores.
-                            </a>
-                        </h2>
-                        <ul class="list-inline fs-12 op-04">
-                            <li class="list-inline-item"> Jul 16</li>
-                            <li class="list-inline-item">15 min read</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--                article 3-->
-        </article>
-        <article class="col-sm-4">
-            <div class="row">
-                <div class="col-2 text-muted fs-2 op-02">
-                    06
-                </div>
-                <div class="col-10 mt-3">
-                    <div>
-                        <!--                        a linki içine alıyorum cunku tum yere gelip basınca hepsı aynı yere linkleniyor-->
-                        <a href="#" class="text-decoration-none text-muted">
-                            <img src="https://picsum.photos/id/20/30/30?grayscale" class="rounded-circle" alt="">
-                            <small class="ms-2">HMay Pang in Better Humans</small>
-                        </a>
-                    </div>
-                    <div>
-
-                        <h2 class="h6 mt-1">
-                            <a href="#" class="text-decoration-none text-dark">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            </a>
-                        </h2>
-                        <ul class="list-inline fs-12 op-04">
-                            <li class="list-inline-item"> Jul 17</li>
-                            <li class="list-inline-item">4 min read</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </div>
-</section>
 <hr>
-<!-- Trendıng On Medium End-->
-<!--    Article examples Start-->
-<!--    .container>.row>col-sm-8+.col-sm-4>ul.list-inline>li.list-inline-item*6>lorem3-->
-<!--    -->
 <section class="container mt-5">
     <div class="row">
         <main class="col-sm-7">

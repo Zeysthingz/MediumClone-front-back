@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'tinymce',
     'easy_thumbnails',
     'page',
-    'user_profile',
     'blog',
+    'user_profile',
     'read',
 ]
 

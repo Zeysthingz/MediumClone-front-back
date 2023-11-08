@@ -11,8 +11,10 @@ from .forms import BlogModelForm
 @login_required(login_url='user_profile:login_view')
 def create_blog_view(request):
     form = BlogModelForm()
+    title = 'Create Blog'
     context = {
         'form': form,
+        'title': title,
     }
     if request.method == 'POST':
         # to get media files we should add request.FILES or None
@@ -33,7 +35,7 @@ def create_blog_view(request):
             messages.success(request, 'Blog created successfully')
             return redirect('home_view')
 
-    return render(request, 'create_blog.html', context)
+    return render(request, 'core/common_components/form.html', context)
 
 
 def category_view(request, category_slug):
