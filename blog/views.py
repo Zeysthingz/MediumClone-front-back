@@ -5,7 +5,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 import json
 
-from .models import Blog, BlogCategory, BlogTag
+from .models import (
+    Blog,
+    BlogCategory,
+    BlogTag,
+    UserFavPost,
+)
 from .forms import BlogModelForm
 
 
@@ -62,5 +67,14 @@ def tag_view(request, tag_slug):
 @login_required(login_url='user_profile:login_view')
 def fav_update_view(request):
     if request.method == 'POST':
-        print(request.POST)
+        post = get_object_or_404(Blog, slug=request.POST.get('slug'))
+        print(post)
+        if post:
+            post_fav, created = UserFavPost.objects.get_or_create(
+                user=request.user, post=post
+            )
+            if not created:
+                post_fav.is_deleted = not post_fav.is_deleted
+                post_fav.save()
+
         return JsonResponse({'status': '200'})

@@ -3,6 +3,7 @@ from .models import (
     Blog,
     BlogCategory,
     BlogTag,
+    UserFavPost,
 )
 
 
@@ -14,11 +15,17 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(BlogCategory)
 class BlogCategoryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'is_active']
-    list_display_links = ['title', 'is_active']
+    list_display = ['pk', 'title', 'is_active']
+    list_display_links = ['pk', 'title', 'is_active']
 
 
 @admin.register(BlogTag)
 class BlogTagAdmin(admin.ModelAdmin):
-    list_display = ['title', 'is_active']
-    list_display_links = ['title', 'is_active']
+    list_display = ['pk', 'title', 'is_active']
+    list_display_links = ['pk', 'title', 'is_active']
+
+
+@admin.register(UserFavPost)
+class UserFavPostAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'user', 'post', 'is_deleted']
+    list_display_links = ['pk', 'user', 'post', 'is_deleted']

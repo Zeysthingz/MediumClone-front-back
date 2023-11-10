@@ -68,3 +68,10 @@ class Blog(BaseModel):
                 "post_slug": self.slug,
             }
         )
+
+
+class UserFavPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    # if user delete a post from db wii save to db but does not show to user
+    is_deleted = models.BooleanField(default=False)
