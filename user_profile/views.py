@@ -8,6 +8,18 @@ from .models import Profile
 from slugify import slugify
 
 
+# user favorite page
+@login_required(login_url='user_profile:login_view')
+def user_favorite_view(request):
+    # reverse relations from userfavpost_set
+    context = {
+        'title': 'Favorite Posts',
+        'favs': request.user.userfavpost_set.filter(is_detele=False).order_by('-updated_at')
+
+    }
+    return render(request, 'post_list.html', context)
+
+
 # profile edit page
 @login_required(login_url='user_profile:login_view')
 def profile_edit_view(request):
