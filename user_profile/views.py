@@ -1,3 +1,4 @@
+from blog.models import Blog
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -11,13 +12,20 @@ from slugify import slugify
 # user favorite page
 @login_required(login_url='user_profile:login_view')
 def user_favorite_view(request):
-    # reverse relations from userfavpost_set
+    ids = request.user.userfavpost_set.filter(is_deleted=False).values_list('post_id', flat=True).order_by(
+        '-updated_at')
+
+    print(ids)
+
+    posts = Blog.objects.filter(id__in=ids, is_active=True)
+    print(posts)
+
     context = {
         'title': 'Favorite Posts',
-        'favs': request.user.userfavpost_set.filter(is_detele=False).order_by('-updated_at')
+        'posts': posts,
 
     }
-    return render(request, 'post_list.html', context)
+    return render(request, 'components/post_list.html', context)
 
 
 # profile edit page

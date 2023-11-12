@@ -26,3 +26,8 @@ class Profile(models.Model):
         return reverse(
             'user_profile:profile_edit_view',
         )
+
+    def get_favorite_blog_url(self):
+        return reverse(
+            'user_profile:user_favorite_view',
+        )
