@@ -69,6 +69,15 @@ class Blog(BaseModel):
             }
         )
 
+    def get_post_edit_url(self):
+        return reverse(
+            'blog:post_edit_view',
+            kwargs={
+                "user_slug": self.user.profile.slug,
+                "post_slug": self.slug,
+            }
+        )
+
 
 class UserFavPost(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

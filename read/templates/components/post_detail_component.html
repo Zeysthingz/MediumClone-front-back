@@ -5,7 +5,19 @@
 
     </div>
     <div class="col-sm-12">
-        <div class=" h6 mt-4 text-decoration-none  text-dark" >{{ post.title }}</div>
+        <div class=" h6 mt-4 text-decoration-none  text-dark" >
+            {{ post.title }}
+            {% if request.user == post.user %}
+            <small>
+                <a href="{{ post.get_post_edit_url }}">
+                    <button type="button" class="btn btn-outline-warning btn-sm m-3">Edit</button>
+                </a>
+                {% endif %}
+            </small>
+
+        </div>
+
+
         <div class="text-muted mt-2">{{ post.content|safe }}</div>
         <hr>
         <div>

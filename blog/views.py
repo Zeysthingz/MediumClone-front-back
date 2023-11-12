@@ -44,6 +44,35 @@ def create_blog_view(request):
     return render(request, 'core/common_components/form.html', context)
 
 
+@login_required(login_url='user_profile:login_view')
+def post_edit_view(request, user_slug, post_slug):
+    post = get_object_or_404(Blog, slug=post_slug)
+    form = BlogModelForm(instance=post)
+    title = 'Edit Blog'
+    context = {
+        'form': form,
+        'title': title,
+    }
+    if request.user != post.user:
+        messages.warning(request, 'You are not allowed to edit this post')
+        return redirect('home_view')
+
+    if request.method == 'POST':
+        form = BlogModelForm(request.POST or None, request.FILES or None, instance=post)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.save()
+            tags_data = json.loads(form.cleaned_data.get('tag'))
+            for tag_data in tags_data:
+                tag, created = BlogTag.objects.get_or_create(title=tag_data.get('value').lower())
+                tag.is_active = True
+                tag.save()
+                f.tag.add(tag)
+            messages.success(request, 'Blog edited successfully')
+            return redirect('home_view')
+    return render(request, 'core/common_components/form.html', context)
+
+
 def category_view(request, category_slug):
     category = get_object_or_404(BlogCategory, slug=category_slug)
     posts = Blog.objects.filter(category=category)
